@@ -41,6 +41,7 @@ public interface LogViewerPresenter {
   void setStreamAllowed(LogStream stream, boolean allowed);
   boolean isStreamAllowed(LogStream stream);
 
+  void limitLogsTimestamp(String start, String end);
   void ignoreLogsBefore(int index);
   void ignoreLogsAfter(int index);
   void resetIgnoredLogs(boolean resetStarting, boolean resetEnding);

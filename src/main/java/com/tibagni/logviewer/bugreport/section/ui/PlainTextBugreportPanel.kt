@@ -10,9 +10,8 @@ import java.awt.GridBagConstraints
 import java.io.File
 import javax.swing.*
 
-
 class PlainTextBugreportPanel(private val plainTextSection: PlainTextSection) :
-  SectionPanel(plainTextSection.sectionName) {
+    SectionPanel(plainTextSection.sectionName) {
 
   private var textEditorPath: File? = null
   private lateinit var openBugreportBtn: JButton
@@ -42,7 +41,7 @@ class PlainTextBugreportPanel(private val plainTextSection: PlainTextSection) :
 
     if (editorFile != null) {
       try {
-        val process = Runtime.getRuntime().exec(editorFile.absolutePath + " " + bugreportFile.absoluteFile)
+        val process = Runtime.getRuntime().exec(arrayOf("$editorFile.absolutePath $bugreportFile.absoluteFile"))
         Logger.debug("Opened $bugreportFile using $editorFile: $process")
       } catch (ex: Exception) {
         JOptionPane.showMessageDialog(

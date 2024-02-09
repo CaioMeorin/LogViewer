@@ -265,6 +265,10 @@ class MainViewImpl(
     saveFilteredLogs?.addActionListener { logViewerView.handleSaveFilteredLogsMenu() }
     logsMenu.add(saveFilteredLogs)
     logsMenu.addSeparator()
+    val limitLogsTimestampItem = JMenuItem("Limit logs timestamp")
+    limitLogsTimestampItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK)
+    limitLogsTimestampItem.addActionListener { logViewerView.handleLimitTimestampMenu() }
+    logsMenu.add(limitLogsTimestampItem)
     val goToTimestampItem = JMenuItem("Go to timestamp")
     goToTimestampItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_DOWN_MASK)
     goToTimestampItem.addActionListener { logViewerView.handleGoToTimestampMenu() }

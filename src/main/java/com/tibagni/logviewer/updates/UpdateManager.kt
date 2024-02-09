@@ -3,10 +3,10 @@ package com.tibagni.logviewer.updates
 import com.tibagni.logviewer.AppInfo
 import com.tibagni.logviewer.logger.Logger
 import com.tibagni.logviewer.util.SwingUtils
-import org.apache.commons.io.IOUtils
-import org.json.JSONObject
 import java.net.URL
 import java.nio.charset.Charset
+import org.apache.commons.io.IOUtils
+import org.json.JSONObject
 
 class UpdateManager(private val listener: UpdateListener) {
   interface UpdateListener {
@@ -23,8 +23,8 @@ class UpdateManager(private val listener: UpdateListener) {
     }
     Logger.debug("Start checking for updates...")
     SwingUtils.doAsync(
-      { latestReleaseInfo },
-      { latest: ReleaseInfo -> notifyIfUpdateAvailable(latest, listener) }
+        { latestReleaseInfo },
+        { latest: ReleaseInfo -> notifyIfUpdateAvailable(latest, listener) }
     ) { tr: Throwable ->
       Logger.error("Not possible to get latest release info", tr)
       listener.onFailedToCheckForUpdate(tr)
@@ -44,11 +44,12 @@ class UpdateManager(private val listener: UpdateListener) {
 
   @get:Throws(InvalidReleaseException::class)
   private val latestReleaseInfo: ReleaseInfo
-    get() = try {
-      val url = URL(AppInfo.LATEST_RELEASE_URL)
-      val jsonResult = JSONObject(IOUtils.toString(url, Charset.forName("UTF-8")))
-      ReleaseInfo(jsonResult)
-    } catch (e: Exception) {
-      throw InvalidReleaseException(e)
-    }
+    get() =
+        try {
+          val url = URL(AppInfo.LATEST_RELEASE_URL)
+          val jsonResult = JSONObject(IOUtils.toString(url, Charset.forName("UTF-8")))
+          ReleaseInfo(jsonResult)
+        } catch (e: Exception) {
+          throw InvalidReleaseException(e)
+        }
 }
